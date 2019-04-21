@@ -82,10 +82,10 @@ $(document).ready(function () {
     var female = $("#female").text();
     var unknown = $("#unknown").text();
     $.each(listOptions, function (key, value) {
-        if (($(value).text()) == "Male") {
+        if (($(value).text()) === "Male") {
             $(value).text(male);
         }
-        else if (($(value).text()) == "Female") {
+        else if (($(value).text()) === "Female") {
             $(value).text(female);
         }
         else {

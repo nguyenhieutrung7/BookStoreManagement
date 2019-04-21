@@ -206,7 +206,11 @@
     <Compile Include="Resources\Order.Vi.Designer.cs" />
     <Compile Include="Resources\PublisherLG.Designer.cs" />
     <Compile Include="Resources\PublisherLG.Vi1.Designer.cs" />
-    <Compile Include="Resources\Register.Designer.cs" />
+    <Compile Include="Resources\Register.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Register.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Register.Vi.Designer.cs" />
     <Compile Include="Resources\Register.Vi1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -337,7 +341,10 @@
     <EmbeddedResource Include="Resources\Order.Vi.resx" />
     <EmbeddedResource Include="Resources\PublisherLG.resx" />
     <EmbeddedResource Include="Resources\PublisherLG.Vi.resx" />
-    <EmbeddedResource Include="Resources\Register.resx" />
+    <EmbeddedResource Include="Resources\Register.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Register.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Register.Vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Register.Vi1.Designer.cs</LastGenOutput>

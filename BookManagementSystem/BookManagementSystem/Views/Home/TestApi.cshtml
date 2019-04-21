@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "TestApi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="border-info col mt-lg-5">
+    <button class="btn btn-info"  id="showinfo-btn">Show Info</button> 
+    <hr/>
+    <table id="example"  class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category Name</th>
+                <th>Author Name</th>
+                <th>ISBN</th>
+                <th>Price</th>
+                <th>Publisher</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody id="bookstocks-tbody">
+            <tr>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Category Name</td>
+                <td>Author Name</td>
+                <td>ISBN</td>
+                <td>Price</td>
+                <td>Publisher</td>
+                <td>Quantity</td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Category Name</td>
+                <td>Author Name</td>
+                <td>ISBN</td>
+                <td>Price</td>
+                <td>Publisher</td>
+                <td>Quantity</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category Name</th>
+                <th>Author Name</th>
+                <th>ISBN</th>
+                <th>Price</th>
+                <th>Publisher</th>
+                <th>Quantity</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+    var bookStocks = {
+        getData:function () {
+            $.ajax({
+                type:"GET",
+                url:"https://localhost:44356/bookstocks",
+                cache:"false",
+                success: function (data) {
+                    $('#bookstocks-tbody').empty();
+                    var tr = $("<tr></tr>");
+                    $.each(data, function (key, item) {
+                        tr.append($("<td></td>").append(item.title));
+                        tr.append($("<td></td>").append(item.description));
+                        tr.append($("<td></td>").append(item.categoryName));
+                        tr.append($("<td></td>").append(item.authorName));
+                        tr.append($("<td></td>").append(item.isbn));
+                        tr.append($("<td></td>").append(item.price));
+                        tr.append($("<td></td>").append(item.publisherName));
+                        tr.append($("<td></td>").append(item.quantity));
+                        $('#bookstocks-tbody').html(tr);
+                        tr.empty();
+                    });
+                }
+            })
+        }
+    }
+
+    $('showinfo-btn').on('click', bookStocks.getData());
+
+</script>

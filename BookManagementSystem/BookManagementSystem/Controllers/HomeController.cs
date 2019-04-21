@@ -15,6 +15,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Threading;
+using System.Web.Http.Cors;
+using System.Web.Http;
 
 namespace BookManagementSystem.Controllers
 {
@@ -178,6 +180,11 @@ namespace BookManagementSystem.Controllers
                 Console.WriteLine(ex.Message);
                 return Convert.ToDouble(1);
             }
+        }
+        
+        public ActionResult TestApi()
+        {
+            return View();
         }
     }
 }

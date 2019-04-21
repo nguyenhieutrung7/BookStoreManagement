@@ -32,21 +32,21 @@ namespace WebApi.Controllers
 
         // GET: api/<controller>
         [HttpGet]
-        public ActionResult<IEnumerable<BookStock>> Get()
+        public async Task<ActionResult<IEnumerable<BookStock>>> Get()
         {
-            return _context.BookStocks;
+            return await _context.BookStocks.ToListAsync();
         }
 
         // GET api/<controller>/5
         [HttpGet("/bookstocks/{id}")]
-        public ActionResult<BookStock> Get(long id)
+        public async Task<ActionResult<BookStock>> Get(long id)
         {
-            var bookStock = _context.BookStocks.Find(id);
+            var bookStock = _context.BookStocks.FindAsync(id);
             if (bookStock == null)
             {
                 return NotFound();
             }
-            return bookStock;
+            return await bookStock;
         }
 
         // POST api/<controller>
