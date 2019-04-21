@@ -1,0 +1,106 @@
+﻿@using Model.Resources
+<!DOCTYPE html>
+<html>
+<head>
+    <TITLE>@HomeLayout.Title</TITLE>
+    <META name="author" content="Team1 .NET">
+    <META name="copyright" content="&copy; 2019 Team1">
+    <META name="keywords" content="frontend,projectfrontend">
+    <META name="date" content="2019-03-19" scheme="YYYY-MM-DD">
+    <!-- Required meta tags -->
+    <META charset="utf-8">
+    <META name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Assets/vendors/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Assets/js/popper.min.js"></script>
+
+    <!-- Fontawesome CSS -->
+
+    <link href="~/Assets/vendors/fontawesome-free-5.8.0-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Assets/css/flag-icon.min.css" rel="stylesheet" />
+
+    <!-- Datatable CSS -->
+    <link href="~/Assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
+
+
+    <script src="~/Assets/vendors/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
+
+
+    <!-- Bootstrap JS -->
+    <script src="~/Assets/vendors/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="~/Assets/vendors/DataTables/datatables.min.js"></script>
+    <link href="~/Assets/css/homestyle.css" rel="stylesheet" />
+    @* Numberal  format js *@
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid position-relative" id="container">
+        <!--Begin header-->
+        <div class="notranslate header">
+            <div class="row">
+                <div id="logo" class="offset-lg-1 col-lg-3">
+                    <a href="#" title="@HomeLayout.Home">
+                        <div class="display-3"><strong>BestSeller</strong></div>
+                        <sup class="fa-pull-right mt-2" id="book-store">Book store</sup>
+                    </a>
+                </div>
+                <div class="top-menu offset-lg-1 col-lg-6">
+                    @{ Html.RenderAction("DropdownUser", "PartialViewLayout");}
+                    <div class="row justify-content-end" id="main-menu">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link font-italic" href="#" title="@HomeLayout.Home" id="home-page"><strong>@HomeLayout.Home</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" title="@HomeLayout.Products"><strong>@HomeLayout.Products</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" title="@HomeLayout.Promotions"><strong>@HomeLayout.Promotions</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" title="@HomeLayout.Profile" id="view-profile"><strong>@HomeLayout.Profile</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" title="@HomeLayout.AboutUs"><strong>@HomeLayout.AboutUs</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" title="@HomeLayout.Contacts"><strong>@HomeLayout.Contacts</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End header-->
+        <!--Begin content-->
+        <div class="row mt-lg-3" id="content">
+            <div id="left-content" class="offset-lg-1 col-lg-3 mt-lg-5">
+                <h4 class="notranslate title">@HomeLayout.Categories</h4>
+                <hr />
+                <ul class="list-group list-group-flush" id="list-categories">
+                    @{Html.RenderAction("ListCategories", "PartialViewLayout");}
+
+                </ul>
+                <h4 class="notranslate mt-5 title">@HomeLayout.Authors</h4>
+                <hr />
+                <ul class="notranslate list-group list-group-flush" id="list-authors">
+                    @{Html.RenderAction("ListAuthors", "PartialViewLayout");}
+                </ul>
+            </div>
+            @RenderBody()
+        </div>
+        <!--End content-->
+    </div>
+    <div class="d-none">
+        <label id="user-current-langauge">@(HttpContext.Current.Response.Cookies["culture"]!=null? HttpContext.Current.Response.Cookies["culture"].Value: "vi")</label>
+        <label id="currency-rate">@HttpContext.Current.Application["CurrentRateUSD_VND"]</label>
+    </div>
+</body>
+</html>
+<script src="~/Assets/js/bootbox/bootbox.all.min.js"></script>
+<script src="~/Assets/js/bootbox/bootbox.locales.min.js"></script>
+<script src="~/Assets/js/bootbox/bootbox.min.js"></script>

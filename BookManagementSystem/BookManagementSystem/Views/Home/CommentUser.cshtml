@@ -1,0 +1,38 @@
+﻿@model List<Model.Models.Comment>
+@using Model.Resources
+
+<div id="comment" class="container tab-pane fade notranslate">
+
+    @foreach (var item in Model)
+    {
+        <br />
+        <div class="media border p-3">
+            <img src="~/Assets/images/customer.jpg" alt="Image customer" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+            <div class="media-body">
+                <h4>@CommentUser.Customer<small><i> @CommentUser.PostedOn @item.CreatedDate.ToString("dd/MM/yyyy")</i></small></h4>
+                <p>@item.CommentContent</p>
+                @foreach (var k in ViewBag.Reply)
+                {
+                    if (item.CommentID == k.CommentID)
+                    {
+                        <div class="media p-3">
+                            <img src="~/Assets/images/admin.png" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+                            <div class="media-body">
+                                <h4>@k.AccountName<small><i> @CommentUser.PostedOn @k.ReplyDate</i></small></h4>
+                                <p>@k.ReplyContent</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
+
+    <p></p>
+    <textarea class="form-control" rows="5" minlength="3" maxlength="1000" placeholder="@CommentUser.InputYourComment...." id="txtComment"></textarea>
+    <button class="btn btn-primary mt-2 btnSend" id="@ViewBag.ID">@CommentUser.SendButton</button>
+</div>
+<div class="d-none">
+    <label id="input-your-comment-message">@CommentUser.InputYourCommentMessage</label>
+</div>
+<script src="~/Assets/js/commentuser.js"></script>

@@ -1,0 +1,185 @@
+﻿@using Model.Resources
+@model Model.ViewModels.RegisterVM
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@Register.Register_Title</title>
+    <!-- Bootstrap CSS -->
+    <link href="~/Assets/vendors/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Fontawesome CSS -->
+    <link href="~/Assets/vendors/fontawesome-free-5.8.0-web/css/all.min.css" rel="stylesheet" />
+
+    <script src="~/Assets/vendors/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
+
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
+    <link href="~/Assets/css/placeholder-text-inputdate.css" rel="stylesheet" />
+    <!-- Bootstrap JS -->
+    <script src="~/Assets/vendors/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="~/Assets/js/main.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="card text-center col-lg-5 centered">
+            <div class="col-8 offset-2 border-bottom padding-top">
+                <h5 class="float-left text-success">@Register.Register_Title</h5>
+            </div>
+            <div class="card-body">
+                <form id="account-register-form" class="needs-validation" action="/Account/Register" method="post" novalidate>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="@Register.User_Name" alt="User Name" required pattern=".{5,50}" autofocus />
+                        <div class="valid-feedback">
+                            @Register.Valid_User_Name
+                        </div>
+                        <div class="invalid-feedback">
+                            @Register.Invalid_User_Name
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="phonenumber" name="phonenumber" placeholder="@Register.Phone_Number" alt="Phone Number" required min="99999999" max="10000000000000" />
+                        <div class="valid-feedback">
+                            @Register.Valid_Phone_Number
+                        </div>
+                        <div class="invalid-feedback">
+                            @Register.Invalid_Phone_Number
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="@Register.Address" alt="Address" required pattern=".{10,200}" />
+                        <div class="valid-feedback">
+                            @Register.Valid_Address
+                        </div>
+                        <div class="invalid-feedback">
+                            @Register.Invalid_Address
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="birthday" name="birthday" placeholder="@Register.Birthday" alt="User Birthday" required />
+                        <div class="valid-feedback">
+                            @Register.Valid_Birthday
+                        </div>
+                        <div class="invalid-feedback">
+                            @Register.Invalid_Birthday
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @if (ViewBag.Lang == "vi")
+                        {
+                            <select class="form-control custom-select" id="genderid" name="GenderID" required="">
+                                <option value="">Chọn Giới Tính</option>
+                                <option value="1">Nam</option>
+                                <option value="2">Nữ</option>
+                                <option value="3">Không tiết lộ</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select class="form-control custom-select" id="genderid" name="GenderID" required="">
+                                <option value="">Choose Gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Unknown</option>
+                            </select>
+                        }
+                        <div class="valid-feedback">
+                            @Register.Valid_Choose_Gender
+                        </div>
+                        <div class="invalid-feedback">
+                            @Register.Invalid_Choose_Gender
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="@Register.Email" alt="Email" required pattern=".{8,50}" />
+                        <div class="valid-feedback">
+                            @Register.Valid_Email
+                        </div>
+                        <div class="invalid-feedback">
+                            @Register.Invalid_Email
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="accountname" name="accountname" placeholder="@Register.Account_Name" alt="Account Name" required pattern="^[^' ']{5,30}" />
+                            <div id="exist-account-alert">
+                                <span class="badge badge-danger"></span>
+                            </div>
+                            <div id="notexist-account-alert">
+                                <span class="badge badge-success"></span>
+                            </div>
+                            <div class="valid-feedback">
+                                @Register.Valid_Account_Name
+                            </div>
+                            <div class="invalid-feedback">
+                                @Register.Invalid_Account_Name
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="@Register.Password" alt="Password" required pattern="^[^' ']{8,50}" />
+                            <div class="valid-feedback">
+                                @Register.Valid_Password
+                            </div>
+                            <div class="invalid-feedback">
+                                @Register.Invalid_Password
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        @Html.ValidationMessage("", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success col-6" type="submit">@Register.Register_Button</button>
+                    </div>
+                    <div class="form-group">
+                        <a href="@Url.Action("Login","Account")" class="text-muted"><u>@Register.Return_Login</u></a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.validate();
+            //Check unique account
+            $("#accountname").change(function () {
+                var accountname = $(this).val();
+                var accountexisttext ="@Html.Raw(Register.Account_Exist)";
+                var accountnoexisttext="@Html.Raw(Register.Account_NoExist)";
+                $.ajax({
+                    url: "/Account/CheckUniqueAccountName",
+                    type: "GET",
+                    data: { accountName: accountname },
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data === false) {
+                            $("#notexist-account-alert .badge-success").text("");
+                            $("#exist-account-alert .badge-danger").text(accountexisttext);
+                        }
+                        else {
+                            $("#exist-account-alert .badge-danger").text("");
+                            $("#notexist-account-alert .badge-success").text(accountnoexisttext);
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            });
+            $("#account-register-form").submit(function (event) {
+                if ($("#exist-account-alert .badge-danger").text() !== "") {
+                    $("#accountname").removeClass("is-valid");
+                    event.preventDefault();
+                }
+
+            });
+        });
+    </script>
+    <script src="~/Assets/vendors/fontawesome-free-5.8.0-web/js/all.min.js"></script>
+</body>
+</html>

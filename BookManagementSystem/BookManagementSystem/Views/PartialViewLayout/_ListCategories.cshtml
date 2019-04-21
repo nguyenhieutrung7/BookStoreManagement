@@ -1,0 +1,26 @@
+﻿@model List<Model.Models.Category>
+<link href="~/Assets/css/leftmenu.css" rel="stylesheet" />
+@for (int i = 0; i < Model.Count(); i++)
+{
+    if (i == 0)
+    {
+        <a class="text-dark" href="#" title="@Model[i].CategoryName">
+            <li id="@Model[i].CategoryID" class="list-group-item list-group-item-action border-top-0">
+                @Model[i].CategoryName
+            </li>
+        </a>
+    }
+    else
+    {
+        <a class="text-dark" href="#" title="@Model[i].CategoryName">
+            <li id="@Model[i].CategoryID" class="list-group-item list-group-item-action border-top-0">
+                @Model[i].CategoryName
+            </li>
+        </a>
+    }
+}
+<label id="lang-google-translate" class="d-none">@ViewBag.Lang</label>
+<div class="d-none" id="google_translate_element"></div>
+<script src="~/Assets/js/trungjs/trung_translate.js"></script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+

@@ -1,0 +1,179 @@
+﻿@using Model.Resources
+@model IEnumerable<Model.Models.SiteOwner>
+@using Model.Resources;
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@AccountLG.Account</h3>
+    <hr />
+
+    <div class="col-md-auto">
+        <button id="account-create" class="btn btn-primary" data-toggle="modal" data-target="#account-create-modal">@AccountLG.CreateNew</button>
+        <p></p>
+
+        <table id="accounts-list" class="row-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>@AccountLG.UserName</th>
+                    <th>@AccountLG.SiteOwnerName</th>
+                    <th>Email</th>
+                    <th>@AccountLG.Gender</th>
+                    <th>@AccountLG.Role</th>
+                    <th>@AccountLG.CreateDate</th>
+                    <th>@AccountLG.Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.SiteOwnerName</td>
+                    <td>@item.Account.AccountName</td>
+                    <td>@item.SiteOwnerEmail</td>
+                    @if (@item.Gender.GenderName.Equals("Male"))
+                    {
+                        <td>@AccountLG.Male</td>
+                    }
+                    else if (@item.Gender.GenderName.Equals("Female"))
+                    {
+                        <td>@AccountLG.Female</td>
+                    }
+                    else
+                    {
+                        <td>@AccountLG.Unknown</td>
+                    }
+                    <td>@AccountLG.SiteOwner</td>
+                    <td>@item.Account.CreatedDate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <button class="btn btn-success account-edit-button" data-siteownerid=@item.SiteOwnerID>@AccountLG.Edit</button> |
+                        <button class="btn btn-info account-detail-button" data-siteownerid=@item.SiteOwnerID>@AccountLG.Detail</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    @*Modal create account*@
+    <div id="account-create-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@AccountLG.CreateAcc</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="account-create-form" class="needs-validation" action="javascript:createAccount();" novalidate>
+                    <div class="modal-body">
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label" for="account-name-create">
+                                    @AccountLG.AccountName:
+                                </label>
+                                <input type="text" class="form-control" id="account-name-create" required pattern="^[^' ']{5,30}" alt="Account Name" />
+                                <div id="exist-account-alert">
+                                    <span class="badge badge-danger"></span>
+                                </div>
+                                <div id="notexist-account-alert">
+                                    <span class="badge badge-success"></span>
+                                </div>
+                                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                                <div class="invalid-feedback">@AccountLG.ValAccName.</div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label" for="password-create">
+                                    @AccountLG.Password:
+                                </label>
+                                <input type="password" class="form-control" id="password-create" required pattern="^[^' ']{8,50}" alt="Password" />
+                                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                                <div class="invalid-feedback">@AccountLG.ValPass.</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label" for="siteowner-name-create">
+                                    @AccountLG.SiteOwnerName:
+                                </label>
+                                <input type="text" class="form-control" id="siteowner-name-create" required pattern=".{5,50}" alt="Site Owner Name" />
+                                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                                <div class="invalid-feedback">@AccountLG.ValSite</div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label">
+                                    @AccountLG.Gender:
+                                </label>
+                                @Html.DropDownList("GenderID", null, htmlAttributes: new { @class = "form-control", @id = "gender-id-create" })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label" for="siteowner-email-create">
+                                    Email :
+                                </label>
+                                <input type="email" class="form-control" id="siteowner-email-create" pattern=".{8,50}" required alt="Site Owner Email" />
+                                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                                <div class="invalid-feedback">@AccountLG.ValMail</div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label" for="siteowner-phonenumber-create">
+                                    @AccountLG.Phone:
+                                </label>
+                                <input type="number" class="form-control" id="siteowner-phonenumber-create" required min="99999999" max="10000000000000" alt="Site Owner Phone" />
+                                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                                <div class="invalid-feedback">@AccountLG.ValPhone</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label" for="siteowner-address-create">
+                                @AccountLG.Address:
+                            </label>
+                            <input type="text" class="form-control" id="siteowner-address-create" required pattern=".{10,}" alt="Site Owner Address" />
+                            <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                            <div class="invalid-feedback">@AccountLG.ValAddress</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">
+                                @AccountLG.Role:
+                            </label>
+                            <label class="form-control">@AccountLG.SiteOwner</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">@AccountLG.Create</button>
+                        <button type="reset" class="btn btn-outline-dark">@AccountLG.Reset</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@AccountLG.Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*Modal edit Account*@
+    <div id="account-edit-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="account-edit-modal-container">
+            </div>
+        </div>
+    </div>
+    @*Modal detail Account*@
+    <div id="account-detail-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="account-detail-modal-container">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="get-value" class="d-none">
+    <label id="account-exist-text">@Register.Account_Exist</label>
+    <label id="account-noexist-text">@Register.Account_NoExist</label>
+</div>
+
+<label id="male" class="d-none">@AccountLG.Male</label>
+<label id="female" class="d-none">@AccountLG.Female</label>
+<label id="unknown" class="d-none">@AccountLG.Unknown</label>
+
+@*Javascript Trung Account Index*@
+<script src="~/Assets/js/trungjs/trung_account_index.js"></script>
+
+

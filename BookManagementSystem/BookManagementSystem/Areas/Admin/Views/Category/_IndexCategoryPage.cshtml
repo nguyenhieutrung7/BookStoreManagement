@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Model.Models.Category>
+@using Model.Resources;
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@CategoryLG.Category</h3>
+    <hr />
+
+    <DIV class="col-md-auto">
+        <button id="category-create" class="btn btn-primary" data-toggle="modal" data-target="#category-create-modal">@CategoryLG.CreateNew</button>
+        <p></p>
+
+        <table id="categories-list" class="row-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>@CategoryLG.CategoryName</th>
+                    <th>@CategoryLG.Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="translate">@item.CategoryName</td>
+                        <td><button class="btn btn-success category-edit-button" data-categoryid=@item.CategoryID>@CategoryLG.Edit</button> | <button class="btn btn-info category-detail-button" data-categoryid=@item.CategoryID>@CategoryLG.Detail</button> </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </DIV>
+    @*Modal create category*@
+    <div id="category-create-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@CategoryLG.CreateCat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="category-create-form" class="needs-validation" action="javascript:createCategory();" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-form-label" for="category-name-create">
+                                @CategoryLG.CategoryName:
+                            </label>
+                            <input type="text" class="form-control" id="category-name-create" required pattern=".{5,50}" alt="Category Name" />
+                            <div id="exist-category-alert">
+                                <span class="badge badge-danger"></span>
+                            </div>
+                            <div id="notexist-category-alert">
+                                <span class="badge badge-success"></span>
+                            </div>
+                            <div class="valid-feedback">@CategoryLG.Lookgood!</div>
+                            <div class="invalid-feedback">@CategoryLG.ValCatName</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label" for="category-description-create">
+                                @CategoryLG.CategoryDes:
+                            </label>
+                            <textarea class="form-control" id="category-description-create" minlength="20" maxlength="300" required rows="5" alt="Category Description"></textarea>
+                            <div class="valid-feedback">@CategoryLG.Lookgood!</div>
+                            <div class="invalid-feedback">@CategoryLG.ValCatDes</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">@CategoryLG.Create</button>
+                        <button type="reset" class="btn btn-outline-dark">@CategoryLG.Reset</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@CategoryLG.Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*Modal edit Category*@
+    <div id="category-edit-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="category-edit-modal-container">
+            </div>
+        </div>
+    </div>
+    @*Modal detail Caegory*@
+    <div id="category-detail-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="category-detail-modal-container">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Assets/js/trungjs/trung_category_index.js"></script>
+
+
+
+

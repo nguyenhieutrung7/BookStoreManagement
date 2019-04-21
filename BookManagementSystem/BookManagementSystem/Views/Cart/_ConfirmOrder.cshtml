@@ -1,0 +1,100 @@
+﻿@model Model.ViewModels.Cart
+@using Model.Models;
+@using Model.Resources
+@using System.Globalization;
+@{
+    Layout = null;
+    var customer = (Customer)ViewBag.Customer != null ? (Customer)ViewBag.Customer : new Customer();
+}
+<h4 class="title font-weight-bold">@ConfirmOrder.ConfirmOrderTitle</h4>
+<hr />
+<div class="row">
+    <div class="col-lg-12">
+        <h5 class="notranslate">@ConfirmOrder.ShippingDetail</h5>
+        <hr />
+        <div class="row notranslate">
+            <div class="col-lg-3">
+                <p>@ConfirmOrder.FullName:</p>
+            </div>
+            <div class="col-lg-9 notranslate">
+                <p>@customer.CustomerName</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 notranslate">
+                <p>@ConfirmOrder.PhoneNumber:</p>
+            </div>
+            <div class="col-lg-9 notranslate">
+                <span id="customer-phone-number">@customer.CustomerPhoneNumber</span>
+                <a href="#" data-toggle="tooltip" title="Edit phone number" id="edit-phone-number"><span class="fa fa-edit"></span></a>
+                <p id="message-phone-number" class="d-none text-danger"></p>
+                <button type="button" class="btn btn-success d-none mt-1" id="save-phone-number">@ConfirmOrder.SaveButton</button>
+                <button type="button" class="btn btn-danger d-none mt-1" id="cancel-phone-number">@ConfirmOrder.CancelButton</button>
+            </div>
+        </div>
+        <div class="row notranslate">
+            <div class="col-lg-3">
+                <label>@ConfirmOrder.DeliveryAddress:</label>
+            </div>
+            <div class="col-lg-9">
+                <span id="customer-address">@customer.CustomerAddress</span>
+                <a href="#" data-toggle="tooltip" title="Edit address" id="edit-address"><span class="fa fa-edit"></span></a>
+                <p id="message-address" class="d-none text-danger"></p>
+                <button type="button" class="btn btn-success mt-1 d-none" id="save-address">@ConfirmOrder.SaveButton</button>
+                <button type="button" class="btn btn-danger mt-1 d-none" id="cancel-address">@ConfirmOrder.CancelButton</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <h5>@ConfirmOrder.OrderDetail</h5>
+        <hr>
+        @foreach (var item in Model.ListCartItems)
+        {
+            <div class="row">
+                <div class="col-lg-9">
+                    <p>x@(item.Quantity)  @item.Book.Title</p>
+                </div>
+                <div class="col-lg-3 notranslate">
+                    <p>$@(String.Format(CultureInfo.CurrentCulture, "{0:c}",Math.Round((Double)item.Book.Price * item.Quantity * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</p>
+                </div>
+            </div>
+        }
+        <hr>
+        <div class="row notranslate">
+            <div class="col-lg-9">
+                <strong>@CartIndex.Total:</strong>
+            </div>
+            <div class="col-lg-3">
+                <strong>@(String.Format(CultureInfo.CurrentCulture, "{0:c}",Math.Round((Double)Model.ComputeTotalPrice() * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</strong>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="offset-lg-3 col-lg-3">
+                <button type="button" class="btn btn-success" id="confirm-order">@ConfirmOrder.Confirm</button>
+            </div>
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-danger" id="cancel-order">@ConfirmOrder.Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Spinner-->
+<div class="modal fade" id="modalSpinner" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">@ConfirmOrder.ProcessingOrder...</h5>
+            </div>
+            <div class="modal-body">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">@ConfirmOrder.Loadding...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-none">
+    <label id="success-message">@ConfirmOrder.SuccessMessage</label>
+</div>
+<script src="~/Assets/js/trungjs/trung_order_sendmail.js"></script>
+<script src="~/Assets/js/confirmorder.js"></script>

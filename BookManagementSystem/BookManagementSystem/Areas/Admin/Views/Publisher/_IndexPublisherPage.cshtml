@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Model.Models.Publisher>
+@using Model.Resources;
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@PublisherLG.PublisherMN</h3>
+    <hr />
+    <div class="col-md-auto">
+        <button id="publisher-create" class="btn btn-primary" data-toggle="modal" data-target="#publisher-create-modal">@PublisherLG.CreateNew</button>
+        <p></p>
+
+        <table id="publishers-list" class="row-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>@PublisherLG.PublisherName</th>
+                    <th>@PublisherLG.PublisherPhone</th>
+                    <th>@PublisherLG.Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.PublisherName</td>
+                        <td>@item.PublisherPhone</td>
+                        <td><button class="btn btn-success publisher-edit-button" data-publisherid=@item.PublisherID>@PublisherLG.Edit</button> | <button class="btn btn-info publisher-detail-button" data-publisherid=@item.PublisherID>@PublisherLG.Detail</button> | <button class="btn btn-danger" data-toggle="modal" data-target=@("#publisher" + item.PublisherID + "-delete-modal")>@PublisherLG.Delete</button></td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    @*Modal create publisher*@
+    <div id="publisher-create-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@PublisherLG.CreatePub</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="publisher-create-form" class="needs-validation" action="javascript:createPublisher();" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-form-label" for="publisher-name-create">
+                                @PublisherLG.PublisherName:
+                            </label>
+                            <input type="text" class="form-control" id="publisher-name-create" required pattern=".{5,50}" alt="Publisher Name" />
+                            <div class="valid-feedback">@PublisherLG.Lookgood!</div>
+                            <div class="invalid-feedback">@PublisherLG.ValPubName</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label" for="publisher-phone-create">
+                                @PublisherLG.PublisherPhone:
+                            </label>
+                            <input type="number" class="form-control" id="publisher-phone-create" required min="99999999" max="10000000000000" alt="Publisher Phone Number" />
+                            <div class="valid-feedback">@PublisherLG.Lookgood!</div>
+                            <div class="invalid-feedback">@PublisherLG.ValPubPhone</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">@PublisherLG.Create</button>
+                        <button type="reset" class="btn btn-outline-dark">@PublisherLG.Reset</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@PublisherLG.Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*Modal edit Publisher*@
+    <div id="publisher-edit-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="publisher-edit-modal-container">
+            </div>
+        </div>
+    </div>
+    @*Modal detail Publisher*@
+    <div id="publisher-detail-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="publisher-detail-modal-container">
+
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+
+
+        //Modal delete Publisher
+        <div class="modal fade" id=@("publisher" + item.PublisherID.ToString() + "-delete-modal") tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">@PublisherLG.Answer: @item.PublisherName</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>@PublisherLG.Publisher <b>"@item.PublisherName"</b> @PublisherLG.Will?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@PublisherLG.No</button>
+                        <button type="button" class="btn btn-danger publisher-submit-delete" data-id=@item.PublisherID data-dismiss="modal">@PublisherLG.Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@*Javascript Trung Publisher Index*@
+<script src="~/Assets/js/trungjs/trung_publisher_index.js"></script>
+
+
+

@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<Model.Models.Book>
+@using PagedList.Mvc;
+@using System.Web.Mvc.Ajax;
+@using Model.ViewModels;
+@using Model.Resources
+@using System.Globalization;
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h4 class="notranslate title font-weight-bold">@IndexBook.Title</h4>
+<hr />
+<div class="alert alert-success alert-dismissible d-none notranslate" id="alert-success">
+    <a href="#" class="close">&times;</a>
+    <strong>@Book.LableSuccess!</strong> @Book.SuccessMessage!
+</div>
+<div class="d-none notranslate">
+    <label id="out-of-stock">@IndexBook.OutOfStockMessage</label>
+    <label id="login-confirm">@IndexBook.LoginConfirm</label>
+</div>
+@{
+    var i = 0;
+    var size = Model.Count();
+    var row = Math.Ceiling((size * 1.0 / 4));
+}
+
+@for (int j = 0; j < row; j++)
+{
+    <div class="row products mt-3 ml-3">
+        @for (int t = 1; t <= 4; t++)
+        {
+            if (i < size)
+            {
+                <div class="col-lg-3 text-center">
+                    <div class="row product" style="border:1px solid silver; width:99%;">
+                        <a href="#" title="@Model.ElementAt(i).Title.ToString()">
+                            <img id="@Model.ElementAt(i).BookID" src="@Model.ElementAt(i).Picture" alt="Book Image" class="img-thumbnail rounded-0">
+                        </a>
+                        <div class="col-lg-12">
+                            <strong class="book-name">
+                                @Model.ElementAt(i).Title.ToString()
+                            </strong>
+                            <strong class="book-author notranslate">@IndexBook.By @Model.ElementAt(i).Author.AuthorName</strong>
+                            <div class="book-summary">
+                                @Model.ElementAt(i).Description
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="notranslate row" style="width:99%;">
+                        <button type="button" class="btn btn-dark rounded-0 buy-now @(IndexBook.BuyNow=="BUYNOW"?"col-lg-7":"col-lg-5")">@IndexBook.BuyNow</button>
+                        <button type="button" class="btn btn-primary rounded-0 @(IndexBook.BuyNow=="BUYNOW"?"col-lg-5":"col-lg-7")"><span class="price">@(String.Format(CultureInfo.CurrentCulture, "{0:c}",Math.Round((Double)Model.ElementAt(i).Price * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])) )</span></button>
+                        @{
+                            var item = ((Cart)ViewBag.Cart).ListCartItems.FirstOrDefault(c => c.Book.BookID == Model.ElementAt(i).BookID) ?? new CartItem();
+                        }
+                        <input type="number" class="d-none quantity" value="@(item==null?Model.ElementAt(i).Quantity:Model.ElementAt(i).Quantity-item.Quantity)" />
+                    </div>
+                </div>
+                i++;
+            }
+        }
+    </div>
+}
+<br />
+<div class="notranslate">
+
+
+    @IndexBook.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @IndexBook.Of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("PartialIndex", new { page, authorID = ViewBag.CurrentAuthorID, categoryID = ViewBag.CurrentCategoryID }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions {
+            HttpMethod = "GET",
+            UpdateTargetId="main-content",
+            AllowCache = false,
+    }))
+</div>
+<script src="~/Assets/js/homeuser.js"></script>

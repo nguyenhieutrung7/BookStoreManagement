@@ -1,0 +1,110 @@
+﻿@model Model.Models.Book
+    @using Model.Resources;
+@{
+    ViewBag.Title = "Create";
+}
+<script async src="~/Assets/js/createbookjs.js" ></script>
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@BookLG.CreateBook</h3>
+    <hr />
+    <DIV class="col-md-auto">
+        <form class="needs-validation" novalidate method="post" action="javascript:createNewBook();">
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.Title</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "@required", @pattern = ".{3,50}" })
+                    <div class="valid-feedback">@BookLG.Valid.</div>
+                    <div class="invalid-feedback">@BookLG.ValTitle</div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>ISBN</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control", @required = "@required", @pattern = ".{5,15}" })
+                    <div class="valid-feedback">@BookLG.Valid.</div>
+                    <div class="invalid-feedback">@BookLG.Valisbn</div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.Summary</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "6", @required = "required",@minlength="30",@maxlength="1000"})
+                    <div class="valid-feedback">@BookLG.Valid.</div>
+                    <div class="invalid-feedback">@BookLG.ValSum</div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.CategoryName</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories as SelectList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.Author</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.DropDownListFor(m => m.AuthorID, ViewBag.Authors as SelectList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.Publisher</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.DropDownListFor(m => m.PublisherID, ViewBag.Publishers as SelectList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.Price</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @required = "required", @pattern = "^[1-9]{1}[0-9]{0,10}$" })
+                    <div class="valid-feedback">@BookLG.Valid.</div>
+                    <div class="invalid-feedback">@BookLG.ValPrice</div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.Quantity</strong>
+                </div>
+                <div class="form-group col-lg-10">
+                    @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @required = "required", @pattern = "^[1-9]{1}[0-9]{0,5}$" })
+                    <div class="valid-feedback">@BookLG.Valid.</div>
+                    <div class="invalid-feedback">@BookLG.ValQuantity</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-right">
+                    <strong>@BookLG.Url</strong>
+                </div>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Picture, new { @class = "form-control", @type = "file", @accept = ".png,.jpg", @required = "required" })
+                    <div class="valid-feedback">@BookLG.Valid.</div>
+                    <div class="invalid-feedback">@BookLG.Url</div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-outline-secondary offset-lg-2 mt-3">@BookLG.Create</button>
+        </form>
+
+    </DIV>
+    <div>
+        <a href="#" id="back-to-list-book" title="Back To List">@BookLG.Back</a>
+    </div>
+    <p></p>
+    <p></p>
+</div>

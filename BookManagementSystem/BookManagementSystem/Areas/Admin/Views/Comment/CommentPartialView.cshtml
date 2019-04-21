@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Model.ViewModels.CommentBookModels>
+ @using Model.Resources;
+@{
+    ViewBag.Title = "Comment Management";
+    //Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- /#sidebar-wrapper -->
+<!-- Page Content -->
+<!--<div id="page-content-wrapper"> -->
+<head>
+    <style type="text/css">
+        .limittext p {
+            word-wrap: break-word;
+        }
+
+        .colortext {
+            color: #007bff;
+        }
+
+        .scroll {
+            overflow-y: scroll;
+            height: 500px;
+        }
+    </style>
+    <script src="~/Assets/js/comment.js"></script>
+    <title>@CommentLG.Comment</title>
+</head>
+
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@CommentLG.Comment</h3>
+    <hr />
+    <button class="btn btn-danger delete-all">@CommentLG.DeleteAll</button>
+    <p></p>
+    <p></p>
+    <table class="row-border" id="tbData">
+        <thead>
+            <tr>
+                <th>@CommentLG.BookName</th>
+                <th>@CommentLG.CommentDate</th>
+                <th>@CommentLG.CommentContent</th>
+                <th>@CommentLG.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="@item.CommentID">
+                    <td class="translate">@item.Title</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.Content</td>
+                    <td><button class="btn btn-success showComment">@CommentLG.Reply</button> | <button class="btn btn-danger showDelete">@CommentLG.Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @*<div class="col-lg-12">
+            @Html.PagedListPager(Model, page => Url.Action("CommentManagement", new { page }))
+        </div>*@
+
+    <!--Modal Reply-->
+    <div id="modelRep" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #cfd3cf">
+                    <h4 class="modal-title text-left">@CommentLG.RepCmm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body limittext scroll" id="loadModal">
+                   <!--Content Reply-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Delete-->
+    <div id="modelDel" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #cfd3cf">
+                    <h4 class="modal-title text-left">@CommentLG.DelCmm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h5>@CommentLG.QuessionDel ?</h5>
+                </div>
+                <div class="modal-footer" id="delete-comment">
+                    <!--Button-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modelDelAll" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #cfd3cf">
+                    <h4 class="modal-title text-left">@CommentLG.DelCmm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h5>@CommentLG.Quession ?</h5>
+                </div>
+                <div class="modal-footer" id="deleteAll-comment">
+                    <!--Button-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<label id="txtDelete" class="d-none">@CommentLG.Delete</label>
+<label id="txtClose" class="d-none">@CommentLG.Close</label>
+<label id="txtPost" class="d-none">@CommentLG.Posted</label>
+<label id="txtReply" class="d-none">@CommentLG.Reply</label>
+<label id="txtEnter" class="d-none">@CommentLG.EnterRep</label>
+<label id="not-data" class="d-none">@CommentLG.NotData</label>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tbData').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/" + $("#current-language").text() + ".json"
+            },
+            "bDestroy": true
+        });
+        //show add book form
+    });
+</script>
+
+

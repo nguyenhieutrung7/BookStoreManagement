@@ -1,0 +1,100 @@
+﻿@model Model.ViewModels.AccountInfoVM
+@using Model.Resources;
+
+@*Modal edit account*@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">@AccountLG.EditAcc: @Model.SiteOwnerName</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form id="account-create-form" class="needs-validation" action="javascript:editAccount();" novalidate>
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col">
+                <label class="col-form-label" for="account-name-edit">
+                    @AccountLG.AccountName:
+                </label>
+                <input type="text" class="form-control" value="@Model.AccountName" id="account-name-edit" required pattern="^[^' ']{5,30}" alt="Account Name" />
+                <div id="exist-account-alert">
+                    <span class="badge badge-danger"></span>
+                </div>
+                <div id="notexist-account-alert">
+                    <span class="badge badge-success"></span>
+                </div>
+                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                <div class="invalid-feedback">@AccountLG.ValAccName.</div>
+            </div>
+            <div class="col">
+                <label class="col-form-label" for="password-edit">
+                    @AccountLG.Password:
+                </label>
+                <input type="password" class="form-control" value="@Model.Password" id="password-edit" required pattern="^[^' ']{8,}" alt="Password" />
+                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                <div class="invalid-feedback">@AccountLG.ValPass.</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="col-form-label" for="siteowner-name-edit">
+                    @AccountLG.SiteOwnerName:
+                </label>
+                <input type="text" class="form-control" value="@Model.SiteOwnerName" id="siteowner-name-edit" required pattern=".{5,50}" alt="Site Owner Name" />
+                <input type="text" id="siteowner-id-edit" value="@Model.SiteOwnerID" hidden alt="Site Owner ID" />
+            </div>
+            <div class="col">
+                <label class="col-form-label" for="gender-id-edit">
+                    @AccountLG.Gender:
+                </label>
+                @Html.DropDownList("GenderID", null, htmlAttributes: new { @class = "form-control", @id = "gender-id-edit" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="col-form-label" for="siteowner-email-edit">
+                    Email :
+                </label>
+                <input type="text" class="form-control" value="@Model.SiteOwnerEmail" id="siteowner-email-edit" pattern=".{8,50}" required alt="Site Owner Email" />
+                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                <div class="invalid-feedback">@AccountLG.ValMail</div>
+            </div>
+            <div class="col">
+                <label class="col-form-label" for="siteowner-phonenumber-edit">
+                    @AccountLG.Phone:
+                </label>
+                <input type="text" class="form-control" value="@Model.SiteOwnerPhoneNumber" id="siteowner-phonenumber-edit" required min="99999999" max="10000000000000" alt="Site Owner Phone Number" />
+                <div class="valid-feedback">@AccountLG.Lookgood!</div>
+                <div class="invalid-feedback">@AccountLG.ValPhone</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="col-form-label" for="siteowner-address-edit">
+                @AccountLG.Address :
+            </label>
+            <input type="text" class="form-control" value="@Model.SiteOwnerAddress" id="siteowner-address-edit" required pattern=".{10,}" alt="Site Owner Address" />
+            <div class="valid-feedback">@AccountLG.Lookgood!</div>
+            <div class="invalid-feedback">@AccountLG.ValAddress</div>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="role-name">
+                @AccountLG.Role:
+            </label>
+            <input type="text" class="form-control" value="@AccountLG.SiteOwner" id="role-name" data-roleid="1" readonly alt="Role Name" />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">@AccountLG.Edit</button>
+        <button type="reset" class="btn btn-outline-dark">@AccountLG.Reset</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">@AccountLG.Close</button>
+    </div>
+</form>
+<div id="edit-get-value" class="d-none">
+    <label id="current-account-name">@Model.AccountName</label>
+</div>
+
+<label id="male" class="d-none">@AccountLG.Male</label>
+<label id="female" class="d-none">@AccountLG.Female</label>
+<label id="unknown" class="d-none">@AccountLG.Unknown</label>
+@*Javascript Trung Account Edit*@
+<script src="~/Assets/js/trungjs/trung_account_edit.js"></script>

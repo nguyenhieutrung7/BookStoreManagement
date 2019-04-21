@@ -1,0 +1,74 @@
+﻿@model Model.Models.SiteOwner
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>SiteOwner</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerAddress)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerAddress)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerEmail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerEmail)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerPhoneNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerPhoneNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.AccountName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Account.AccountName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Gender.GenderName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Gender.GenderName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.SiteOwnerID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

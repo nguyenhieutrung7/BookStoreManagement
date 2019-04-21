@@ -1,0 +1,69 @@
+﻿@model Model.Models.Book
+@using Model.Resources
+@using System.Globalization;
+@{
+    ViewBag.Title = @Book.BookDetail;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<div class="col-lg-7 mt-lg-5 ml-3" id="main-content">
+    <h4 class="title font-weight-bold notranslate">@Book.BookDetail</h4>
+    <hr />
+    <div class="alert alert-success alert-dismissible d-none notranslate" id="alert-success">
+        <a href="#" class="close">&times;</a>
+        <strong>@Book.LableSuccess!</strong> @Book.SuccessMessage!
+    </div>
+    <div class="row" id="detail-book">
+        <input id="quantity-in-stock" type="number" max="@ViewBag.Quantity" class="d-none" />
+        <div class="col-lg-5" id="book-image">
+            <img src="@Model.Picture" alt="Book Image" class="img-thumbnail" />
+        </div>
+        <div class="col-lg-7" id="book-infor">
+            <h2 class="translate">@Model.Title</h2>
+            <hr />
+            @Html.HiddenFor(m => m.BookID)
+            <div class="row notranslate">
+                <strong class="col-lg-4">@Book.AuthorName:</strong><strong class="col-lg-8">@(Model.Author.AuthorName != null ? Model.Author.AuthorName : "Đang cập nhật")</strong>
+            </div>
+            <div class="row notranslate">
+                <p class="col-lg-4">@Book.Price:</p><span id="price" class="col-lg-8">@(String.Format(CultureInfo.CurrentCulture, "{0:c}", Math.Round((Double)Model.Price * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])) )</span>
+            </div>
+            <div class="row notranslate">
+                <p class="col-lg-4">@Book.PublisherName:</p><span class="col-lg-8">@(Model.Publisher.PublisherName != null ? Model.Publisher.PublisherName : "Đang cập nhật")</span>
+            </div>
+            <div class="row notranslate">
+                <p class="col-lg-4">@Book.CategoryName:</p><span class="col-lg-8">@(Model.Category.CategoryName != null ? Model.Category.CategoryName : "Đang cập nhật")</span>
+            </div>
+            <div class="row notranslate">
+                <p class="col-lg-4">@Book.Status:</p><span class="col-lg-8" id="status">@(ViewBag.Quantity > 0 ? "In stock" : "Out of stock")</span>
+            </div>
+            <div class="row">
+                <label class="col-lg-2">@Book.Quantity:</label>
+                <input type="number" id="quantity" class="form-control offset-lg-1 col-lg-2" min="1" max="@ViewBag.Quantity" value="1" />
+                <a href="#" role="button" class="notranslate btn btn-info offset-lg-1 col-lg-4@(ViewBag.Quantity>0?"":" disabled")" id="add-to-cart">@Book.AddToCart</a>
+            </div>
+        </div>
+    </div>
+    <div class="book-description-comment mt-5">
+        <ul class="nav nav-tabs notranslate" id="@Model.BookID">
+            <li class="nav-item">
+                <a class="nav-link active" href="#book-decription"><h5>@Book.Description</h5></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link clickCMT" href="#comment"><h5>@Book.Comment</h5></a>
+            </li>
+        </ul>
+        <div class="tab-content col-lg-12">
+            <div id="book-decription" class="container tab-pane active">
+                <br>
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+            @{Html.RenderAction("CommentUser", "Home", new { id = ViewBag.ID });}
+        </div>
+    </div>
+</div>
+<script src="~/Assets/js/thinhjs.js"></script>
+<script src="~/Assets/js/CommentUser.js"></script>
+<script src="~/Assets/js/bookuser.js"></script>

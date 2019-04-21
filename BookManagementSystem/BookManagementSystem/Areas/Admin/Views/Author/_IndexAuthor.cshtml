@@ -1,0 +1,204 @@
+﻿@model IEnumerable<Model.Models.Author>
+@using Model.Resources;
+
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@AuthorLG.Author</h3>
+    <hr />
+    <DIV class="col-md-auto">
+        <a href="#" id="add-new-author" class="btn btn-primary">@AuthorLG.CreateNew</a>
+        <p></p>
+        <table id="author-list" class="row-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="display:none;">ID</th>
+                    <th>@AuthorLG.AuthorName</th>
+                    <th>@AuthorLG.AuthorPN</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="set-data">
+                @if (Model.Count() > 0)
+                {
+                    foreach (var author in Model)
+                    {
+                        <tr id="@author.AuthorID">
+                            <td style="display:none;">@author.AuthorID</td>
+                            <td>@author.AuthorName</td>
+                            <td>@author.AuthorPhone</td>
+                            <td><a href="#" class="btn btn-success edit-author">@AuthorLG.Edit</a> | <a href="#" class="btn btn-info detail-author">@AuthorLG.Detail</a>| <a href="#" class="btn btn-danger delete-author">@AuthorLG.Delete</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </DIV>
+</div>
+
+<!---Add author modal-->
+<div id="add-author-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@AuthorLG.AddAuthor</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate method="post" action="javascript:createAuthor();">
+                    <div class="row">
+                        <div class="col-lg-3 text-right pt-2">
+                            @AuthorLG.AuthorName:
+                        </div>
+                        <div class="form-group col-lg-9">
+                            <input type="text" id="author-name" class="form-control" required pattern="^\w{1}.{1,48}\S$" />
+                            <div class="valid-feedback">@AuthorLG.Valid.</div>
+                            <div class="invalid-feedback">@AuthorLG.ValAutName</div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 text-right pt-2">
+                            @AuthorLG.AuthorPN:
+                        </div>
+                        <div class="form-group col-lg-9">
+                            <input type="text" id="author-phone" class="form-control" required pattern="^[0-9]{10,13}$" />
+                            <div class="valid-feedback">@AuthorLG.Valid.</div>
+                            <div class="invalid-feedback">@AuthorLG.ValAutPhone  </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary border">@AuthorLG.Save</button>
+                        <button type="button" class="btn btn-default border" data-dismiss="modal">@AuthorLG.Cancel</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Detail Author-->
+<div id="detail-author-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@AuthorLG.DetaiAuthor</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2">
+                        @AuthorLG.ID:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="author-id" class="form-control-plaintext" readonly />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2">
+                        @AuthorLG.AuthorName:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="author-name" class="form-control-plaintext" readonly />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2">
+                        @AuthorLG.AuthorPN:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="author-phone" class="form-control-plaintext" readonly />
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2">
+                        @AuthorLG.ListBook:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <select id="list-books" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2">
+                        @AuthorLG.IsActive:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="is-active" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default border" data-dismiss="modal">@AuthorLG.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Author-->
+<div id="edit-author-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@AuthorLG.EditAuthor</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="javascript:editAuthor();" class="needs-validation" novalidate >
+                    <div class="row d-none">
+                        <div class="form-group col-lg-9">
+                            <input type="text" id="author-id" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 text-right pt-2">
+                            @AuthorLG.AuthorName:
+                        </div>
+                        <div class="form-group col-lg-9">
+                            <input type="text" id="author-name" class="form-control" required pattern="^.{3,50}$" />
+                            <div class="valid-feedback">@AuthorLG.Valid.</div>
+                            <div class="invalid-feedback">@AuthorLG.ValAutName</div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 text-right pt-2">
+                            @AuthorLG.AuthorPN:
+                        </div>
+                        <div class="form-group col-lg-9">
+                            <input type="text" id="author-phone" class="form-control" required pattern="^[0-9]{10,13}$" />
+                            <div class="valid-feedback">@AuthorLG.Valid.</div>
+                            <div class="invalid-feedback">@AuthorLG.ValAutPhone</div>
+                        </div>
+                    </div>
+                    <div class="row d-none">
+                        <div class="col-lg-3 text-right">
+                            @AuthorLG.IsActive:
+                        </div>
+                        <div class="form-group form-check col-lg-9">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" checked id="is-active">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary border">@AuthorLG.Save</button>
+                        <button type="button" class="btn btn-default border" data-dismiss="modal" id="cancel-edit">@AuthorLG.Cancel</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<label id="is-active-label" class="d-none">@AuthorLG.True</label>
+<script src="~/Assets/js/authormanagementjs.js"></script>
+
+
+

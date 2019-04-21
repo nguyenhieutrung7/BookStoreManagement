@@ -1,0 +1,225 @@
+﻿
+@model IEnumerable<Model.ViewModels.OrderAccountModel>
+@using Model.Resources;
+@{
+    ViewBag.Title = "Order Management";
+
+}
+
+<!-- /#sidebar-wrapper -->
+<!-- Page Content -->
+<!--<div id="page-content-wrapper"> -->
+
+<head class="notranslate">
+    <title>@Order.OrderManagement</title>
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@Order.OrderManagement</h3>
+
+    <hr />
+    <div id="alert-delivering-mail" class="alert alert-info d-none">
+        <strong>@Order.SendDeliver</strong>
+        <div class="spinner-border text-info float-right" role="status">
+            <span class="sr-only">@Order.Loading</span>
+        </div>
+    </div>
+    <div id="alert-cancelled-mail" class="alert alert-danger d-none">
+        <strong>@Order.SendCancel </strong>
+        <div class="spinner-border text-danger float-right" role="status">
+            <span class="sr-only">@Order.Loading</span>
+        </div>
+    </div>
+    <div id="alert-completed-mail" class="alert alert-success d-none">
+        <strong>@Order.SendComplete </strong>
+        <div class="spinner-border text-success float-right" role="status">
+            <span class="sr-only">@Order.Loading</span>
+        </div>
+    </div>
+    <div class="alert alert-warning d-none" id="warning-alert">
+        <strong>@Order.Warning!</strong> @Order.SelectOrder
+    </div>
+    <div class="alert alert-success d-none" id="success-alert">
+        <strong>@Order.Success!</strong>
+    </div>
+    @if (@ViewBag.QuantityConfirm == 0)
+    {
+    <button class="btn btn-secondary check-confirm" disabled>@Order.MultiConfirm</button>
+
+    }
+    else
+    {
+    <button class="btn btn-success check-confirm">@Order.MultiConfirm</button>
+
+
+    }
+
+
+    <p></p>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="check-all">
+        <label class="custom-control-label" for="check-all">@Order.CheckAll</label>
+    </div>
+    <p></p>
+    <table class="row-border" id="tbData">
+        <thead>
+            <tr>
+                <th>@Order.Choose</th>
+                <th>@Order.AccountName</th>
+                <th>@Order.OrderDate</th>
+                <th>@Order.ModifiedOrder</th>
+                <th>@Order.TotalMoney</th>
+                <th>@Order.OrderStatus</th>
+                <th>@Order.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr id="@item.OrderID">
+                @if (@item.OrderStatusID == 3 || @item.OrderStatusID == 4)
+                {
+                    <td><input type="checkbox" class="form-check-input check" value="" id="chk-select" disabled></td>
+                }
+                else
+                {
+                    <td><input type="checkbox" class="form-check-input check" value="" id="chk-select"></td>
+                }
+                <td>@item.AccountCustomerName</td>
+                <td>@item.OrderDate.ToString("dd/MM/yyyy")</td>
+                <td>@item.ModifiedDate.ToString("dd/MM/yyyy")</td>
+                <td>@item.TotalMoney</td>
+                @if (item.OrderStatusID == 1)
+                {
+                    <td>@Order.Ordered</td>
+                    <td><button class="btn btn-success click-confirm" id="@item.OrderStatusID">@Order.Confirm</button> | <button class="btn btn-primary show-detail">@Order.Detail</button> | <button class="btn btn-danger click-cancel">@Order.Cancel</button></td>
+                }
+                else if (item.OrderStatusID == 2)
+                {
+                    <td>@Order.Delivering</td>
+                    <td><button class="btn btn-success click-confirm" id="@item.OrderStatusID">@Order.Complete</button> | <button class="btn btn-primary show-detail">@Order.Detail</button> | <button class="btn btn-secondary" disabled>@Order.Cancel</button></td>
+                }
+                else if (item.OrderStatusID == 3)
+                {
+                    <td>@Order.Complete</td>
+                    <td><button class="btn btn-secondary" id="@item.OrderStatusID" disabled>@Order.Done</button> | <button class="btn btn-primary show-detail">@Order.Detail</button> | <button class="btn btn-secondary" disabled>@Order.Cancel</button></td>
+                }
+                else
+                {
+                    <td>@Order.Canceled</td>
+                    <td><button class="btn btn-secondary " id="@item.OrderStatusID" disabled>@Order.Done</button> | <button class="btn btn-primary show-detail">@Order.Detail</button> | <button class="btn btn-secondary" disabled>@Order.Canceled</button></td>
+                }
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="detail-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-left">@Order.OrderDetail</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <div class="col-lg-3 text-right pt-2">
+                                @Order.AccountName:
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <input type="text" id="accountName" class="form-control-plaintext" readonly />
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 text-right pt-2">
+                                Email:
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <input type="text" id="email" class="form-control-plaintext" readonly />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 text-right pt-2">
+                                @Order.OrderAddress:
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <input type="text" id="address" class="form-control-plaintext" readonly />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 text-right pt-2">
+                                @Order.OrderPhone:
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <input type="text" id="phone" class="form-control-plaintext" readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <img src="~/Assets/images/shopping-bag.png" alt="image order" width="180" height="200" />
+                    </div>
+                </div>
+
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>@Order.BookName</th>
+                            <th>@Order.Quantity</th>
+                            <th>@Order.Money</th>
+                        </tr>
+                    </thead>
+                    <tbody id="load-detail">
+                        <!--Load Detail-->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">@Order.Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<label id="have" class="d-none">@Order.Have </label>
+<label id="slconfirm" class="d-none"> @Order.OrderConfirm </label>
+<label id="slcomplete" class="d-none"> @Order.OrderComplete </label>
+
+<script src="~/Assets/js/trungjs/trung_order_sendmail.js"></script>
+<script src="~/Assets/js/order.js"></script>
+<script type="text/javascript">
+   
+    $(document).ready(function () {
+
+        $('#tbData').DataTable(
+            {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/" + $("#current-language").text() + ".json"
+                },
+                "bDestroy": true
+            }
+        );
+        //show add book form
+    });
+</script>
+

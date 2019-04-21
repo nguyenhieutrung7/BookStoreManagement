@@ -1,0 +1,143 @@
+﻿@using Model.Models;
+@using Model.Resources
+@model System.Collections.Generic.List<Model.Models.Order>
+@using System.Globalization;
+@{
+    Customer customer = (Customer)ViewBag.Customer ?? new Customer();
+}
+<h4 class="title">@IndexProfile.ProfileInformation</h4>
+<hr />
+<div class="row">
+    <span class="col-lg-3 mt-2">@IndexProfile.Username:</span>
+    <input type="text" class="col-lg-9 form-control-plaintext" value="@customer.CustomerName" disabled />
+</div>
+<div class="row">
+    <span class="col-lg-3 mt-2">@IndexProfile.Email:</span>
+    <input type="text" class="col-lg-9 form-control-plaintext" value="@customer.CustomerEmail" disabled />
+</div>
+
+<div class="row">
+    <span class="col-lg-3 mt-2">@IndexProfile.AccountName:</span>
+    <input type="text" class="col-lg-9 form-control-plaintext" value="@customer.Account.AccountName" disabled />
+</div>
+
+<div class="row">
+    <span class="col-lg-3 mt-2">@IndexProfile.PhoneNumber:</span>
+    <input type="text" class="col-lg-9 form-control-plaintext" value="@customer.CustomerPhoneNumber" disabled />
+</div>
+
+<div class="row">
+    <span class="col-lg-3 mt-2">@IndexProfile.Address:</span>
+    <input type="text" class="col-lg-9 form-control-plaintext" value="@customer.CustomerAddress" disabled />
+</div>
+
+
+<h4 class="title mt-3">@IndexProfile.MyOrder</h4>
+<hr />
+@if (Model.Count() > 0)
+{
+    foreach (var order in Model)
+    {
+        <div class="row mt-2">
+            <div class="col-lg-12" style="background-color:#F5F2F2; border-radius:10px;">
+                <div class="row">
+                    <p class="col-lg-3 mt-2">@IndexProfile.OrderedID: <span class="order-id">@order.OrderID</span></p>
+                    @{
+                        var status = "";
+                        switch (order.OrderStatu.OrderStatusID)
+                        {
+                            case 1:
+                                status = IndexProfile.Ordered;
+                                break;
+                            case 2:
+                                status = IndexProfile.Delivering;
+                                break;
+                            case 3:
+                                status = IndexProfile.Completed;
+                                break;
+                            case 4:
+                                status = IndexProfile.Canceled;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    <p class="col-lg-5 mt-2">@IndexProfile.OrderedStatus:<strong> @status</strong></p>
+                    <p class="col-lg-4 mt-2">@IndexProfile.OrderedDate: @order.OrderDate.ToString("dd/MM/yyyy")</p>
+                </div>
+                <div class="row notranslate">
+                    <p class="col-lg-3 mt-2">@IndexProfile.Total: @(String.Format(CultureInfo.CurrentCulture,"{0:c0}" ,Math.Round((Double)order.TotalMoney * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])) )</p>
+                    <p class="col-lg-9 mt-2">@IndexProfile.DeliveryAddress: @order.OrderAddress</p>
+                </div>
+                <div class="row">
+                    <button role="button" class="offset-lg-5 col-lg-3 btn btn-primary view-detail-order mb-2">@IndexProfile.ViewOrderDetail</button>
+                    @if (order.OrderStatusID != 1)
+                    {
+                        <button type="button" class="offset-lg-2 col-lg-3 btn btn-secondary mb-2 ml-4" disabled>@IndexProfile.CancelOrder</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="offset-lg-2 col-lg-3 btn btn-danger mb-2 ml-4 cancel-order">@IndexProfile.CancelOrder</button>
+                    }
+
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-12 mt-2 detail-order" style="display:none;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>@CartIndex.Title</th>
+                            <th>@CartIndex.Price</th>
+                            <th>@CartIndex.Quantity</th>
+                            <th>@CartIndex.Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var orderDetail in order.OrderDetails)
+                        {
+                            <tr>
+                                <td>@orderDetail.Book.Title</td>
+                                <td class="notranslate">@(String.Format(CultureInfo.CurrentCulture, "{0:c0}",Math.Round((Double)orderDetail.Book.Price * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</td>
+                                <td class="notranslate">@orderDetail.Quantity</td>
+                                <td class="notranslate">@(String.Format(CultureInfo.CurrentCulture,"{0:c0}", Math.Round((Double)orderDetail.Money * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h5>@IndexProfile.Message!</h5>
+}
+<div class="d-none">
+    <label id="confirm-title">@IndexProfile.ConfirmTitle</label>
+    <label id="confirm-message">@IndexProfile.ConfirmMessage</label>
+    <label id="yes-result">@IndexProfile.YesResult</label>
+    <label id="no-result">@IndexProfile.NoResult</label>
+</div>
+<script type="text/javascript">
+    $(".view-detail-order").off("click").on("click", function (e) {
+        $(this).parent().parent().siblings(".detail-order").slideToggle(400);
+        switch ($(this).text()) {
+            case "Close Order Detail":
+                $(this).text("View Order Detail");
+                break;
+            case "Đóng chi tiết đơn hàng":
+                $(this).text("Xem chi tiết đơn hàng");
+                break;
+            case "View Order Detail":
+                $(this).text("Close Order Detail");
+                break;
+            case "Xem chi tiết đơn hàng":
+                $(this).text("Đóng chi tiết đơn hàng");
+                break;
+        }
+    });
+</script>
+<script src="~/Assets/js/profile.js"></script>

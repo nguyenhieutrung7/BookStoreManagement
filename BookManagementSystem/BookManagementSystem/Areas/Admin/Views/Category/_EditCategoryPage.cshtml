@@ -1,0 +1,46 @@
+﻿@model Model.Models.Category
+    @using Model.Resources;
+@*Modal edit account*@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">@CategoryLG.EditCat: @Model.CategoryName</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form id="category-create-form" class="needs-validation" action="javascript:editCategory();" novalidate>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-form-label" for="category-name">
+                @CategoryLG.CategoryName:
+            </label>
+            <input type="text" class="form-control" id="category-name-edit" value="@Model.CategoryName" alt="Category Name" required pattern=".{5,50}" />
+            <input type="text" id="category-id-edit" value="@Model.CategoryID" hidden alt="Category ID" />
+            <div id="exist-category-alert">
+                <span class="badge badge-danger"></span>
+            </div>
+            <div id="notexist-category-alert">
+                <span class="badge badge-success"></span>
+            </div>
+            <div class="valid-feedback">@CategoryLG.Lookgood!</div>
+            <div class="invalid-feedback">@CategoryLG.ValCatName</div>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="category-description-edit">
+                @CategoryLG.CategoryDes:
+            </label>
+            <textarea class="form-control" id="category-description-edit" required minlenght="20" maxlength="300" rows="5" alt="Category Description">@Model.Description</textarea>
+            <div class="valid-feedback">@CategoryLG.Lookgood!</div>
+            <div class="invalid-feedback">@CategoryLG.ValCatDes</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">@CategoryLG.Edit</button>
+        <button type="reset" class="btn btn-outline-dark">@CategoryLG.Reset</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">@CategoryLG.Close</button>
+    </div>
+</form>
+
+<script src="~/Assets/js/trungjs/trung_category_edit.js"></script>
+
+

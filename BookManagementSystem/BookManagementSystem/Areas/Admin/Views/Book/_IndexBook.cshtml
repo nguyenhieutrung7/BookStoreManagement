@@ -1,0 +1,187 @@
+﻿@model IEnumerable<Model.Models.Book>
+@using Model.Resources;
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid notranslate">
+    <h3 class="mt-4">@BookLG.Book</h3>
+    <hr />
+    <DIV class="col-md-auto">
+        <a href="#" id="add-new-book" class="btn btn-primary">@BookLG.Add</a>
+        <p></p>
+        <table id="books-list" class="row-border" style="width:100%">
+            <thead >
+                <tr>
+                    <th style="display:none;">ID</th>
+                    <th>@BookLG.Title</th>
+                    <th>@BookLG.Price</th>
+                    <th>@BookLG.Quantity</th>
+                    <th>@BookLG.Image</th>
+                    <th>@BookLG.IsActive</th>
+                    <th>@BookLG.Action</th>
+                </tr>
+            </thead>
+            <tbody id="set-data">
+                @if (Model.Count() > 0)
+                {
+                    foreach (var book in Model)
+                    {
+                        <tr id="@book.BookID">
+                            <td style="display:none;">@book.BookID</td>
+                            <td class="translate">@book.Title</td>
+                            <td >@book.Price.ToString()</td>
+                            <td >@book.Quantity.ToString()</td>
+                            <td ><img class="img-thumbnail" src="@book.Picture" alt="Book Image" width="40" /></td>
+                            <td >@(book.IsActive ? BookLG.True : "False")</td>
+                            <td ><a href="#" class="btn btn-success edit-button ">@BookLG.Edit</a> | <a href="#" class="btn btn-info detail-book">@BookLG.Detail</a> | <a href="#" class="btn btn-danger delete-book">@BookLG.Delete</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </DIV>
+</div>
+
+<!---Detail book modal-->
+<div id="detail-book-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title ">@BookLG.DetailBook</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.ID:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="BookID" class="form-control-plaintext" readonly />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        ISBN:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="ISBN" class="form-control-plaintext" readonly />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.Title:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <div class="form-control-plaintext">
+                            <label id="Title"></label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.Summary:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <div class="form-control-plaintext">
+                            <label id="Description"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.CategoryName:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <div class="form-control-plaintext">
+                            <label id="Category"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.Author:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="AuthorName" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.Publisher:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="Publisher" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.Price:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="Price" class="form-control-plaintext" readonly />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.Quantity:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="Quantity" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.IsActive:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <div class="form-control-plaintext">
+                            <label id="IsActive"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.Image:
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <img id="Picture" width="120" alt="Image Book" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.CreateDate:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="CreatedDate" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-right pt-2 ">
+                        @BookLG.ModifiedDate:
+                    </div>
+                    <div class="form-group col-lg-9">
+                        <input type="text" id="ModifiedDate" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default border" data-dismiss="modal">@BookLG.Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<label id="yes" class="d-none">@BookLG.Yes</label>
+<label id="no" class="d-none">@BookLG.No</label>
+<label id="ans" class="d-none">@BookLG.Answer</label>
+<label id="deletebook" class="d-none">@BookLG.DeleteBook</label>
+
+<script src="~/Assets/js/bookmanagement.js"></script>
+

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+          "http://www.w3.org/TR/html4/loose.dtd">
+
+<HTML>
+@using Model.Resources;
+@using Model.Infrastructure;
+<HEAD profile="">
+    <TITLE>@LayoutLanguage.BookManagementSystem</TITLE>
+    <META name="author" content="Team1 .NET">
+    <META name="copyright" content="&copy; 2019 Team1">
+    <META name="keywords" content="frontend,projectfrontend">
+    <META name="date" content="2019-03-19" scheme="YYYY-MM-DD">
+    <!-- Required meta tags -->
+    <META charset="utf-8">
+    <META name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Assets/vendors/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Fontawesome CSS -->
+
+    <link href="~/Assets/vendors/fontawesome-free-5.8.0-web/css/all.min.css" rel="stylesheet" />
+
+    <!-- Datatable CSS -->
+
+    <link href="~/Assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
+
+
+    <script src="~/Assets/vendors/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/Assets/vendors/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="~/Assets/vendors/DataTables/datatables.min.js"></script>
+</HEAD>
+<BODY>
+    <nav class="navbar navbar-light bg-light border-bottom fixed-top notranslate" id="navbar-booktitle">
+        <a href="" class="navbar-brand" id="navbar-bookbrand">@LayoutLanguage.BookManagementSystem</a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @HomeLayout.Choose_Language
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button"><a id="vietnamese" href="@Url.Action("ChangeLanguage", "Order", new { lang = "vi" })"><img class="img-thumbnail w-25" src="https://lipis.github.io/flag-icon-css/flags/4x3/vn.svg" alt="Vietnam Flag">@HomeLayout.Vietnamese</a></button>
+
+                <button class="dropdown-item" type="button"><a id="english" href="@Url.Action( "ChangeLanguage", "Order", new { lang = "en" })"><img class="img-thumbnail w-25" src="https://lipis.github.io/flag-icon-css/flags/4x3/um.svg" alt="United States Minor Outlying Islands Flag">@HomeLayout.English</a></button>
+
+            </div>
+        </div>
+        <label id="current-language" class="d-none">@ViewBag.Language</label>
+        <div class="dropdown">
+            <A href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="far fa-envelope"></i></A>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#"><i class="fas fa-user"></i> User Profile</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Log out</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <A href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-list-alt"></i></A>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#"><i class="fas fa-user"></i> User Profile</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Log out</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <A href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-bell"></i></A>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#" title="User Profile"><i class="fas fa-user"></i> User Profile</a>
+                <a class="dropdown-item" href="#" title="Log Out"><i class="fas fa-sign-out-alt"></i> Log out </a>
+            </div>
+        </div>
+        @{Html.RenderAction("DropdownSiteOwner", "PartialViewLayout");}
+    </nav>
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading notranslate">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="@LayoutLanguage.Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group list-group-flush notranslate">
+                <button class="list-group-item list-group-item-action btn-outline-primary active" id="home-admin"><i class="fas fa-tachometer-alt"></i>@LayoutLanguage.Home</button>
+                <button class="list-group-item list-group-item-action btn-outline-primary" id="book-category-management"><i class="fas fa-table"></i> @LayoutLanguage.Category</button>
+                <button class="list-group-item list-group-item-action btn-outline-primary" id="author-management"><i class="fas fa-table"></i> @LayoutLanguage.Author</button>
+                <button class="list-group-item list-group-item-action btn-outline-primary" id="publisher-management"><i class="far fa-edit"></i> @LayoutLanguage.Publisher</button>
+                <button class="list-group-item list-group-item-action btn-outline-primary" id="book-management"><i class="fas fa-wrench"></i> @LayoutLanguage.Book</button>
+                <button class="list-group-item list-group-item-action btn-outline-primary" id="account-management"><i class="fas fa-user"></i> @LayoutLanguage.Account</button>
+                <button class="list-group-item list-group-item-action btn-outline-primary" id="comment-management"><i class="fas fa-comments"></i> @LayoutLanguage.Comment</button>
+                <button class="list-group-item list-group-item-action btn-outline-primary" id="order-management"><i class="fas fa-shopping-cart"></i> @LayoutLanguage.Order</button>
+                <div class="d-none" id="google_translate_element"></div>
+                <label id="lang-google-translate" class="d-none">@ViewBag.Lang</label>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        @RenderBody()
+    </div>
+    <!-- Fontawesome JS -->
+    <script src="~/Assets/js/bootbox/bootbox.all.min.js"></script>
+    <script src="~/Assets/js/bootbox/bootbox.locales.min.js"></script>
+    <script src="~/Assets/js/bootbox/bootbox.min.js"></script>
+    <script src="~/Assets/vendors/fontawesome-free-5.8.0-web/js/all.min.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+    <script src="~/Assets/js/trungjs/trung_translate.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</BODY>
+</HTML>

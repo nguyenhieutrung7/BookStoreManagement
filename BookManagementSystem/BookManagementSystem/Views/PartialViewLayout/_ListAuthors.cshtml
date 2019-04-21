@@ -1,0 +1,21 @@
+﻿@model List<Model.Models.Author>
+<link href="~/Assets/css/leftmenu.css" rel="stylesheet" />
+@for (int i = 0; i < Model.Count(); i++)
+{
+    if (i == 0)
+    {
+        <a class="text-dark" href="#" title="@Model[i].AuthorName">
+            <li id="@Model[i].AuthorID" class="list-group-item list-group-item-action border-top-0">
+                @Model[i].AuthorName
+            </li>
+        </a>
+    }
+    else
+    {
+        <a  class="text-dark" href="#" title="@Model[i].AuthorName">
+            <li id="@Model[i].AuthorID" class="list-group-item list-group-item-action">
+                @Model[i].AuthorName
+            </li>
+        </a>
+    }
+}

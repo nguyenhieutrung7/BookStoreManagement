@@ -1,0 +1,63 @@
+﻿@model Model.ViewModels.Cart
+@using Model.Resources
+@using System.Globalization;
+@{
+
+    ViewBag.Title = @CartIndex.CartTitle;
+    Layout = null;
+}
+<div id="cart-index" class="notranslate">
+    <h4 class="title font-weight-bold">@CartIndex.CartTitle</h4>
+    <hr />
+    <table class="table table-hover" id="cart-table">
+        <thead>
+            <tr>
+                <th class="d-none">Book ID</th>
+                <th>@CartIndex.Title</th>
+                <th>@CartIndex.AuthorName</th>
+                <th>@CartIndex.Quantity</th>
+                <th>@CartIndex.Price</th>
+                <th>@CartIndex.Total</th>
+                <th>@CartIndex.Action</th>
+            </tr>
+        </thead>
+        <tbody id="cart-table-body">
+            @if (Model.ListCartItems.Count() > 0)
+            {
+                foreach (var item in Model.ListCartItems)
+                {
+
+                    <tr id="@item.Book.BookID">
+                        <td class="d-none">@item.Book.BookID</td>
+                        <td class="translate">@item.Book.Title</td>
+                        <td>@item.Book.AuthorName</td>
+                        <td width="100px;"><input type="number" class="form-control quantity-book" value="@item.Quantity" min="1" max="@item.Book.Quantity" /></td>
+                        <td>@(String.Format(CultureInfo.CurrentCulture, "{0:c}", Math.Round((Double)item.Book.Price * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</td>
+                        <td>@(String.Format(CultureInfo.CurrentCulture, "{0:c}", Math.Round((Double)item.Book.Price * (Double)item.Quantity * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</td>
+                        <td><a href="#" role="button" class="btn btn-danger delete-item">@CartIndex.Delete</a></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr id="empty-data">
+                    <td colspan="6"><h5 class="text-center">@CartIndex.Message</h5></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="row">
+        <strong class="col-lg-4">@CartIndex.Total: <span id="total-price">@(String.Format(CultureInfo.CurrentCulture, "{0:c}", Math.Round((Double)Model.ComputeTotalPrice() * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</span></strong>
+        <a href="#" role="button" class="btn btn-success col-lg-3" id="continue-shopping">@CartIndex.ContinueShopping</a>
+        <a href="#" role="button" id="check-out" class="btn btn-success offset-lg-1 col-lg-2@(Model.ListCartItems.Count()==0?" disabled":"")">@CartIndex.CheckOut</a>
+    </div>
+    <div class="row d-none">
+        <label id="incorrect-quantity-message">@CartIndex.IncorrectQuantityMessage</label>
+    </div>
+</div>
+
+<script src="~/Assets/js/cart.js"></script>
+
+
+

@@ -1,0 +1,80 @@
+﻿@model Model.Models.SiteOwner
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>SiteOwner</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerAddress)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerAddress)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerEmail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerEmail)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SiteOwnerPhoneNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SiteOwnerPhoneNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.AccountName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Account.AccountName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Gender.GenderName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Gender.GenderName)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

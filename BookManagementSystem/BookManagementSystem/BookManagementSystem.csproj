@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BC4DAAF3-7BAE-4F04-B393-56DBEA040B72}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BookManagementSystem</RootNamespace>
+    <AssemblyName>BookManagementSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseLanguageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MailController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PartialViewLayoutController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PublisherController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PartialViewLayoutController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\bootstrap.min.js" />
+    <Content Include="Assets\css\font-awesome.css" />
+    <Content Include="Assets\css\homestyle.css" />
+    <Content Include="Assets\css\leftmenu.css" />
+    <Content Include="Assets\css\sonstyle.css" />
+    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\images\13_1.jpg" />
+    <Content Include="Assets\images\14_1.jpg" />
+    <Content Include="Assets\images\15_1.jpg" />
+    <Content Include="Assets\images\16_1.jpg" />
+    <Content Include="Assets\images\17_1.jpg" />
+    <Content Include="Assets\images\1_1.jpg" />
+    <Content Include="Assets\images\20_1.jpg" />
+    <Content Include="Assets\images\21_1.jpg" />
+    <Content Include="Assets\images\24_1.jpg" />
+    <Content Include="Assets\images\25_1.jpg" />
+    <Content Include="Assets\images\25_2.jpg" />
+    <Content Include="Assets\images\2_1.jpg" />
+    <Content Include="Assets\images\4_1.jpg" />
+    <Content Include="Assets\images\7_1.jpg" />
+    <Content Include="Assets\images\8_1.jpg" />
+    <Content Include="Assets\images\9_1.jpg" />
+    <Content Include="Assets\images\admin.png" />
+    <Content Include="Assets\images\book.png" />
+    <Content Include="Assets\images\customer.jpg" />
+    <Content Include="Assets\images\img012.u2469.d20160628.t165013.jpg" />
+    <Content Include="Assets\images\library.jpg" />
+    <Content Include="Assets\images\shopping-bag.png" />
+    <Content Include="Assets\js\authormanagementjs.js" />
+    <Content Include="Assets\js\bookmanagement.js" />
+    <Content Include="Assets\js\bootbox\bootbox.all.min.js" />
+    <Content Include="Assets\js\bootbox\bootbox.locales.min.js" />
+    <Content Include="Assets\js\bootbox\bootbox.min.js" />
+    <Content Include="Assets\js\cart.js" />
+    <Content Include="Assets\js\comment.js" />
+    <Content Include="Assets\js\CommentUser.js" />
+    <Content Include="Assets\js\confirmorder.js" />
+    <Content Include="Assets\js\createbookjs.js" />
+    <Content Include="Assets\js\editbookjs.js" />
+    <Content Include="Assets\js\homeuser.js" />
+    <Content Include="Assets\js\jquery.min.js" />
+    <Content Include="Assets\js\main.js" />
+    <Content Include="Assets\js\order.js" />
+    <Content Include="Assets\js\popper.min.js" />
+    <Content Include="Assets\js\profile.js" />
+    <Content Include="Assets\js\thinhjs.js" />
+    <Content Include="Assets\js\bookuser.js" />
+    <Content Include="Assets\js\trungjs\trung_account_edit.js" />
+    <Content Include="Assets\js\trungjs\trung_account_index.js" />
+    <Content Include="Assets\js\trungjs\trung_category_edit.js" />
+    <Content Include="Assets\js\trungjs\trung_category_index.js" />
+    <Content Include="Assets\js\trungjs\trung_order_sendmail.js" />
+    <Content Include="Assets\js\trungjs\trung_publisher_edit.js" />
+    <Content Include="Assets\js\trungjs\trung_publisher_index.js" />
+    <Content Include="Assets\js\trungjs\trung_translate.js" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-grid.css" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-grid.min.css" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-reboot.css" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-reboot.min.css" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap.css" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap.min.css" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.bundle.js" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.bundle.min.js" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.js" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.min.js" />
+    <Content Include="Assets\vendors\DataTables\DataTables-1.10.18\images\sort_asc.png" />
+    <Content Include="Assets\vendors\DataTables\DataTables-1.10.18\images\sort_asc_disabled.png" />
+    <Content Include="Assets\vendors\DataTables\DataTables-1.10.18\images\sort_both.png" />
+    <Content Include="Assets\vendors\DataTables\DataTables-1.10.18\images\sort_desc.png" />
+    <Content Include="Assets\vendors\DataTables\DataTables-1.10.18\images\sort_desc_disabled.png" />
+    <Content Include="Assets\vendors\DataTables\datatables.min.css" />
+    <Content Include="Assets\vendors\DataTables\datatables.min.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\all.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\all.min.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\brands.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\brands.min.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\fontawesome.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\fontawesome.min.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\regular.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\regular.min.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\solid.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\solid.min.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\svg-with-js.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\svg-with-js.min.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\v4-shims.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\css\v4-shims.min.css" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\all.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\all.min.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\brands.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\brands.min.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\fontawesome.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\fontawesome.min.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\regular.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\regular.min.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\solid.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\solid.min.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\v4-shims.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\js\v4-shims.min.js" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-brands-400.svg" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-regular-400.svg" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Assets\vendors\jquery-3.3.1\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-grid.css.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-grid.min.css.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-reboot.css.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap.css.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap.min.css.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.bundle.js.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.js.map" />
+    <Content Include="Assets\vendors\bootstrap-4.3.1\js\bootstrap.min.js.map" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-brands-400.eot" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-brands-400.ttf" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-brands-400.woff" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-brands-400.woff2" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-regular-400.eot" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-regular-400.ttf" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-regular-400.woff" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-regular-400.woff2" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-solid-900.eot" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-solid-900.ttf" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-solid-900.woff" />
+    <Content Include="Assets\vendors\fontawesome-free-5.8.0-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Admin\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\PartialViewLayout\_DropdownSiteOwner.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\_IndexAccountPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\_EditAccountPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\_DetailAccountPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Publisher\_IndexPublisherPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Publisher\_DetailPublisherPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Publisher\_EditPublisherPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_IndexCategoryPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_EditCategoryPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_DetailCategoryPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Author\_IndexAuthor.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\_CreateBook.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\_EditBook.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\_IndexBook.cshtml" />
+    <Content Include="Areas\Admin\Views\Comment\CommentPartialView.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\OrderPartialView.cshtml" />
+    <Content Include="Areas\Admin\Views\Mail\_DetailMail.cshtml" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\CommentUser.cshtml" />
+    <Content Include="Views\PartialViewLayout\_ListAuthors.cshtml" />
+    <Content Include="Views\PartialViewLayout\_ListCategories.cshtml" />
+    <Content Include="Views\SiteOwners\Create.cshtml" />
+    <Content Include="Views\SiteOwners\Delete.cshtml" />
+    <Content Include="Views\SiteOwners\Details.cshtml" />
+    <Content Include="Views\SiteOwners\Edit.cshtml" />
+    <Content Include="Views\SiteOwners\Index.cshtml" />
+    <Content Include="Views\Cart\_CartIndex.cshtml" />
+    <Content Include="Views\Home\_Index.cshtml" />
+    <Content Include="Views\Home\_Detail.cshtml" />
+    <Content Include="Views\PartialViewLayout\_DropdownUser.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Cart\_ConfirmOrder.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Views\Home\Detail.cshtml" />
+    <Content Include="Views\Profile\_IndexProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\BaseLanguage\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\ListCategories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonBox\CommonBox.csproj">
+      <Project>{13E0C2E3-67CD-4007-9869-A642906C98EB}</Project>
+      <Name>CommonBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{2f25b812-f8fe-4fcd-b018-0b8a64015978}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60148</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60148/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

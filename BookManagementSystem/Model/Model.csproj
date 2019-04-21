@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2F25B812-F8FE-4FCD-B018-0B8A64015978}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dao\AccountDao.cs" />
+    <Compile Include="Dao\AuthorDao.cs" />
+    <Compile Include="Dao\BookDao.cs" />
+    <Compile Include="Dao\CategoryDao.cs" />
+    <Compile Include="Dao\CommentDao.cs" />
+    <Compile Include="Dao\OrderDAO.cs" />
+    <Compile Include="Dao\PublisherDao.cs" />
+    <Compile Include="Infrastructure\Language.cs" />
+    <Compile Include="Infrastructure\LanguageManagement.cs" />
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Author.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Book.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BookManagement.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BookManagement.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BookManagement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BookManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BookManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gender.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Publisher.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reply.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteOwner.cs">
+      <DependentUpon>BookManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AccountLG.Designer.cs" />
+    <Compile Include="Resources\AccountLG.Vi1.Designer.cs" />
+    <Compile Include="Resources\AuthorLG.Designer.cs" />
+    <Compile Include="Resources\AuthorLG.Vi1.Designer.cs" />
+    <Compile Include="Resources\Book.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Book.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Book.Vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Book.Vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\BookLG.Designer.cs" />
+    <Compile Include="Resources\BookLG.Vi1.Designer.cs" />
+    <Compile Include="Resources\CartIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CartIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CartIndex.Vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CartIndex.Vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CategoryLG.Designer.cs" />
+    <Compile Include="Resources\CategoryLG.Vi1.Designer.cs" />
+    <Compile Include="Resources\CommentLG.Designer.cs" />
+    <Compile Include="Resources\CommentLG.Vi1.Designer.cs" />
+    <Compile Include="Resources\CommentUser.Designer.cs" />
+    <Compile Include="Resources\CommentUser.Vi.Designer.cs" />
+    <Compile Include="Resources\ConfirmOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmOrder.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ConfirmOrder.Vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmOrder.Vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\HomeLayout.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeLayout.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\HomeLayout.Vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeLayout.Vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\IndexBook.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexBook.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\IndexProfile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexProfile.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\IndexProfile.Vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexProfile.Vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\LayoutLanguage.Designer.cs" />
+    <Compile Include="Resources\LayoutLanguage.Vi1.Designer.cs" />
+    <Compile Include="Resources\Login1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Mail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mail.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Mail.Vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mail.Vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Order.Designer.cs" />
+    <Compile Include="Resources\Order.Vi.Designer.cs" />
+    <Compile Include="Resources\PublisherLG.Designer.cs" />
+    <Compile Include="Resources\PublisherLG.Vi1.Designer.cs" />
+    <Compile Include="Resources\Register.Designer.cs" />
+    <Compile Include="Resources\Register.Vi.Designer.cs" />
+    <Compile Include="Resources\Register.Vi1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Register.Vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AccountInfoVM.cs" />
+    <Compile Include="ViewModels\AuthorViewModel.cs" />
+    <Compile Include="ViewModels\BookViewModel.cs" />
+    <Compile Include="ViewModels\CartItem.cs" />
+    <Compile Include="ViewModels\CommentBookModels.cs" />
+    <Compile Include="ViewModels\CurrentCustomer.cs" />
+    <Compile Include="ViewModels\CurrentSiteOwner.cs" />
+    <Compile Include="ViewModels\LoginVM.cs" />
+    <Compile Include="ViewModels\OrderAccountModel.cs" />
+    <Compile Include="ViewModels\OrderDetailBookModel.cs" />
+    <Compile Include="ViewModels\OrderDetailCustomer.cs" />
+    <Compile Include="ViewModels\RegisterVM.cs" />
+    <Compile Include="ViewModels\ReplyAccount.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Models\BookManagement.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BookManagement.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\BookManagement.edmx.diagram">
+      <DependentUpon>BookManagement.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonBox\CommonBox.csproj">
+      <Project>{13E0C2E3-67CD-4007-9869-A642906C98EB}</Project>
+      <Name>CommonBox</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AccountLG.resx" />
+    <EmbeddedResource Include="Resources\AccountLG.Vi.resx" />
+    <EmbeddedResource Include="Resources\AuthorLG.resx" />
+    <EmbeddedResource Include="Resources\AuthorLG.Vi.resx" />
+    <EmbeddedResource Include="Resources\Book.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Book.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Book.Vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Book.Vi.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BookLG.resx" />
+    <EmbeddedResource Include="Resources\BookLG.Vi.resx" />
+    <EmbeddedResource Include="Resources\CartIndex.Vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CartIndex.Vi.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CartIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+      <LastGenOutput>CartIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CategoryLG.resx" />
+    <EmbeddedResource Include="Resources\CategoryLG.Vi.resx" />
+    <EmbeddedResource Include="Resources\CommentLG.resx" />
+    <EmbeddedResource Include="Resources\CommentLG.Vi.resx" />
+    <EmbeddedResource Include="Resources\CommentUser.resx" />
+    <EmbeddedResource Include="Resources\CommentUser.Vi.resx" />
+    <EmbeddedResource Include="Resources\ConfirmOrder.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmOrder.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ConfirmOrder.Vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmOrder.Vi.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\HomeLayout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeLayout.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\HomeLayout.Vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeLayout.Vi.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IndexBook.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexBook.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IndexBook.Vi.resx">
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IndexProfile.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexProfile.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IndexProfile.Vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexProfile.Vi.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Model.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LayoutLanguage.resx" />
+    <EmbeddedResource Include="Resources\LayoutLanguage.Vi.resx" />
+    <EmbeddedResource Include="Resources\Login.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Login.Vi.resx" />
+    <EmbeddedResource Include="Resources\Mail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Mail.Vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mail.Vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Order.resx" />
+    <EmbeddedResource Include="Resources\Order.Vi.resx" />
+    <EmbeddedResource Include="Resources\PublisherLG.resx" />
+    <EmbeddedResource Include="Resources\PublisherLG.Vi.resx" />
+    <EmbeddedResource Include="Resources\Register.resx" />
+    <EmbeddedResource Include="Resources\Register.Vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Register.Vi1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\BookManagement.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BookManagement.edmx</DependentUpon>
+      <LastGenOutput>BookManagement.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BookManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BookManagement.edmx</DependentUpon>
+      <LastGenOutput>BookManagement.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

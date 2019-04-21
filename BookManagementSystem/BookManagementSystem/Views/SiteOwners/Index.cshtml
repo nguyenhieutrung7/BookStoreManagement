@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Model.Models.SiteOwner>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteOwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteOwnerAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteOwnerEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteOwnerPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender.GenderName)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteOwnerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteOwnerAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteOwnerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteOwnerPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender.GenderName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.SiteOwnerID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.SiteOwnerID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.SiteOwnerID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

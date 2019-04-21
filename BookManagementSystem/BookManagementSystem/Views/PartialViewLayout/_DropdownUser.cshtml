@@ -1,0 +1,41 @@
+﻿@using Model.Infrastructure
+@using Model.Resources
+@using System.Globalization;
+<div class="row justify-content-end">
+    <ul class="nav">
+        @{
+            if (ViewBag.CustomerName != null)
+            {
+                <li class="nav-item">
+                    <label class="nav-link border-right">@HomeLayout.Welcome,  <strong>@(ViewBag.CustomerName)</strong><a href="/Account/Logout" title="@HomeLayout.Logout" class="ml-2">@HomeLayout.Logout</a></label>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <label class="nav-link border-right"><a href="/Account/Login" title="@HomeLayout.Login">@HomeLayout.Login</a> <a href="/Account/Register" title="@HomeLayout.Register" class="ml-2">@HomeLayout.Register</a></label>
+                </li>
+            }
+        }
+        <li class="nav-item">
+            <a id="view-shopping-cart" class="nav-link " href="#" title="@HomeLayout.ShoppingCart"><i class="fa fa-shopping-cart mr-1"></i>@HomeLayout.ShoppingCart (<span id="number-items-in-cart">@(ViewBag.NumberBooksInCart != null ? ViewBag.NumberBooksInCart : 0)</span>) <span id="total-price-in-cart">@(String.Format(CultureInfo.CurrentCulture,"{0:c}",Math.Round((Double)ViewBag.TotalPriceInCart * (Double)HttpContext.Current.Application["CurrentRateUSD_VND"])))</span></a>
+        </li>
+        <li class="nav-item">
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @HomeLayout.Choose_Language
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button"><a id="vietnamese" href="@Url.Action("ChangeLanguage", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), new { language = "vi" })"><img class="img-thumbnail w-25" src="https://lipis.github.io/flag-icon-css/flags/4x3/vn.svg" alt="Vietnam Flag">@HomeLayout.Vietnamese</a></button>
+
+                    <button class="dropdown-item" type="button"><a id="english" href="@Url.Action( "ChangeLanguage", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), new { language = "en" })"><img class="img-thumbnail w-25" src="https://lipis.github.io/flag-icon-css/flags/4x3/um.svg" alt="United States Minor Outlying Islands Flag">@HomeLayout.English</a></button>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <span class="btn btn-primary">@ViewBag.Lang </span>
+        </li>
+    </ul>
+</div>
+<script src="~/Assets/js/homeuser.js"></script>
