@@ -16,7 +16,7 @@ namespace WebApi.Controllers
         public ActionResult<IEnumerable<BookStock>> Get()
         {
             List<BookStock> listBookStock = new List<BookStock>();
-            BookStock bookStock = new BookStock() { Title = "Phi Lý Trí", Description = "Best Book", AuthorName = "Don Ariel", CategoryName = "Kinh Tế", ISBN = "4235435435", PublisherName = "NXB Trẻ", Price = 20000, Quantity = 15 };
+            BookStock bookStock = new BookStock() { Title = "", Description = "", AuthorName = "", CategoryName = "", ISBN = "", PublisherName = "", Price = 0, Quantity = 0 };
             listBookStock.Add(bookStock);
             return listBookStock;
         }

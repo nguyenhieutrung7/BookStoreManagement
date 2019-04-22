@@ -5,6 +5,7 @@
 }
 
 <div class="border-info col mt-lg-5">
+    <h1 class="display-4" id="usdvnd">USD -> VND: </h1>
     <button class="btn btn-info"  id="showinfo-btn">Show Info</button> 
     <hr/>
     <table id="example"  class="display" style="width:100%">
@@ -58,35 +59,24 @@
 
 </div>
 <script>
+    function GetUSD () {
+        $.ajax({
+            type: "GET",
+            url: "https://free.currencyconverterapi.com/api/v6/convert?q=USD_VND&compact=ultra&apiKey=ab21461397b33d18d702",
+            cache: "false",
+            success: function (data) {
+                $('#usdvnd').append(data.USD_VND);
+                alert(data.USD_VND);
+            }
+        });
+    }
+    GetUSD();
+</script>
+<script src="~/Assets/js/trungjs/webapi/trung_testapi_index.js"></script>
+<script>
     $(document).ready(function() {
         $('#example').DataTable();
     });
-    var bookStocks = {
-        getData:function () {
-            $.ajax({
-                type:"GET",
-                url:"https://localhost:44356/bookstocks",
-                cache:"false",
-                success: function (data) {
-                    $('#bookstocks-tbody').empty();
-                    var tr = $("<tr></tr>");
-                    $.each(data, function (key, item) {
-                        tr.append($("<td></td>").append(item.title));
-                        tr.append($("<td></td>").append(item.description));
-                        tr.append($("<td></td>").append(item.categoryName));
-                        tr.append($("<td></td>").append(item.authorName));
-                        tr.append($("<td></td>").append(item.isbn));
-                        tr.append($("<td></td>").append(item.price));
-                        tr.append($("<td></td>").append(item.publisherName));
-                        tr.append($("<td></td>").append(item.quantity));
-                        $('#bookstocks-tbody').html(tr);
-                        tr.empty();
-                    });
-                }
-            })
-        }
-    }
-
-    $('showinfo-btn').on('click', bookStocks.getData());
+    $('#showinfo-btn').off("click").on("click", bookStocks.getData);
 
 </script>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Models;
@@ -11,7 +12,6 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [Route("bookstocks")]
-    [ApiController]
     public class BookStocksController : ControllerBase
     {
         private readonly TodoContext _context;

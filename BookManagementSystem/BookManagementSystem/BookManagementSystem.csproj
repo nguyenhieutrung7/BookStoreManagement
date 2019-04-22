@@ -233,6 +233,7 @@
     <Content Include="Assets\js\trungjs\trung_publisher_edit.js" />
     <Content Include="Assets\js\trungjs\trung_publisher_index.js" />
     <Content Include="Assets\js\trungjs\trung_translate.js" />
+    <Content Include="Assets\js\trungjs\webapi\trung_testapi_index.js" />
     <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-grid.css" />
     <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-grid.min.css" />
     <Content Include="Assets\vendors\bootstrap-4.3.1\css\bootstrap-reboot.css" />
